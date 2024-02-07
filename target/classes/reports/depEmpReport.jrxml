@@ -1,0 +1,66 @@
+<jasperReport>  
+   
+   <queryString>
+      <![CDATA[]]>
+   </queryString>
+   
+   <field name = "name" class = "java.lang.String">
+      <fieldDescription><![CDATA[NAME]]></fieldDescription>
+   </field>
+   
+   <columnHeader>
+      <band height = "23">
+     <staticText>
+            <reportElement mode = "Opaque" x = "0" y = "3" 
+               width = "535" height = "15" backcolor = "#70A9A9" />
+            
+            <box>
+               <bottomPen lineWidth = "1.0" lineColor = "#CCCCCC" />
+            </box>
+            
+            <textElement />
+            <text><![CDATA[]]> </text>
+    </staticText>
+   
+    <staticText>
+            <reportElement x = "414" y = "3" width = "121" height = "15" />
+            
+            <textElement textAlignment = "Center" verticalAlignment = "Middle">
+               <font isBold = "true" />
+            </textElement>
+            <text><![CDATA[NAME]]></text>
+    </staticText>
+    
+    </band>
+    </columnHeader>
+    
+    <detail>
+        <band height="51" splitType="Stretch">
+        
+           
+         <staticText>
+            <reportElement mode = "Opaque" x = "0" y = "0" 
+               width = "535" height = "14" backcolor = "#E5ECF9" />
+            
+            <box>
+               <bottomPen lineWidth = "0.25" lineColor = "#CCCCCC" />
+            </box>
+            
+            <textElement />
+            <text><![CDATA[]]> </text>
+         </staticText>
+        
+           <textField>
+            <reportElement x = "414" y = "0" width = "121" height = "15" />
+            
+            <textElement textAlignment = "Center" verticalAlignment = "Middle">
+               <font size = "9" />
+            </textElement>
+            
+            <textFieldExpression class = "java.lang.String">
+               <![CDATA[$F{NAME}]]>
+            </textFieldExpression>
+         </textField>
+        </band>
+    </detail>
+</jasperReport>
