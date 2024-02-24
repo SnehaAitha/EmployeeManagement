@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.employee.EmployeeManagement.dto.Department;
 import com.employee.EmployeeManagement.dto.Employee;
 import com.employee.EmployeeManagement.response.Response;
 import com.employee.EmployeeManagement.service.EmployeeService;
@@ -94,6 +93,3 @@ public class EmployeeController {
 	}
 	
 }
-
-
-
