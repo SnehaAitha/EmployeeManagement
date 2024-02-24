@@ -27,7 +27,7 @@ public class DepartmentController {
 	public Response<List<Department>> fetchAllDepartments() {
 
 		try {
-			logger.debug("In fetchIncomingNotifications.");
+			logger.debug("In fetchAllDepartments.");
 			List<Department> departments = depService.fetchAllDepartments();
 			if(departments != null && departments.size() == 0) 
 				return new Response<List<Department>>(HttpStatus.OK, "Departments retrived successfully with no rows." , departments);
@@ -38,15 +38,16 @@ public class DepartmentController {
 		}
 	}
 	
-	 @GetMapping("/generateDepartmentReport")
+	/*@GetMapping("/generateDepartmentReport")
 	    public void generateReport(HttpServletResponse response) throws Exception {
 	        byte[] reportBytes = depService.generateDepEmpReport();
-	 
+
 	        response.setContentType("application/pdf");
 	        response.setHeader("Content-Disposition", "inline; depemp-report.pdf");
-	 
+
 	        OutputStream outputStream = response.getOutputStream();
 	        outputStream.write(reportBytes);
 	        outputStream.flush();
-	    }
+	    }*/
+
 }

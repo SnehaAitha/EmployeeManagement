@@ -1,19 +1,3 @@
-CREATE TABLE employee (
-    id varchar(10) PRIMARY KEY,
-    name varchar(50),
-    email varchar(50),
-    position varchar(50),
-    salary int,
-    dept_id varchar(10)
-  );
-
-CREATE TABLE department (
-    id varchar(10) PRIMARY KEY,
-    name varchar(50),
-    location varchar(50)
-   );
-
-
 INSERT INTO DEPARTMENT (id, name,location) VALUES ('dept01', 'Human Resources','Building A');
 INSERT INTO DEPARTMENT (id, name,location) VALUES ('dept02', 'Engineering','Building B');
 

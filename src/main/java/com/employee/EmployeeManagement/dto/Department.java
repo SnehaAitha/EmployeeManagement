@@ -1,12 +1,31 @@
 package com.employee.EmployeeManagement.dto;
 
+import java.io.Serializable;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
-public class Department {
+@Entity
+@Table(name="DEPARTMENT")
+public class Department implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 	
+	@Id
+	@Column(name="id")
+	//@GeneratedValue(strategy=GenerationType.AUTO)
 	private String id;	
+	
 	private String name;	
 	private String location;	
+	
+	@OneToMany(mappedBy="department",cascade = CascadeType.REMOVE)
+	@JsonManagedReference
 	private List<Employee> employees;
 
 	public String getId() {
@@ -40,6 +59,10 @@ public class Department {
 	public void setEmployees(List<Employee> employees) {
 		this.employees = employees;
 	}
-	
 
+	@Override
+	public String toString() {
+		return "Department [id=" + id + ", name=" + name + ", location=" + location + ", employees=" + employees + "]";
+	}
+	
 }

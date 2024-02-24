@@ -1,6 +1,7 @@
 package com.employee.EmployeeManagement.controller;
 
 import java.util.List;
+import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,12 +43,12 @@ public class EmployeeController {
 		}
 	}
 	
-	@PostMapping(value = "/fetchEmployeesInDepartment")
-	public Response<List<Employee>> fetchEmployeesInDepartment(@RequestBody Department dept) {
+	@GetMapping(value = "/fetchEmployeesInDepartment/{deptId}")
+	public Response<List<Employee>> fetchEmployeesInDepartment(@PathVariable("deptId") String deptId) {
 
 		try {
 			logger.debug("In fetchEmployeesInDepartment.");
-			List<Employee> employees = empService.fetchEmployeesInDepartment(dept.getId());
+			List<Employee> employees = empService.fetchEmployeesInDepartment(deptId);
 			if(employees != null && employees.size() == 0) 
 				return new Response<List<Employee>>(HttpStatus.OK, "Employees in a department retrived successfully with no rows." , employees);
 			return new Response<List<Employee>>(HttpStatus.OK, "Employees in a department retrived successfully.", employees);
@@ -61,11 +62,16 @@ public class EmployeeController {
 	public Response<String> deleteEmployeeInDepartment(@PathVariable("empId") String empId) {
 
 		try {
-			logger.debug("In fetchEmployeesInDepartment.");
-			boolean delStatus = empService.deleteEmployeeInDepartment(empId);
-			if(delStatus == true) 
-				return new Response<String>(HttpStatus.OK, "Employee deleted successfully." , empId);
-			return new Response<String>(HttpStatus.NOT_FOUND, "Employee is not found.", empId);
+			logger.debug("In deleteEmployeeInDepartment.");
+			
+			Optional<Employee> employee = empService.fetchEmployee(empId);
+			if(employee.isEmpty() || !employee.isPresent()) 
+				return new Response<String>(HttpStatus.NOT_FOUND, "Employee doesnt exists.");
+			empService.deleteEmployeeInDepartment(empId);
+			Optional<Employee> deletedEmployee = empService.fetchEmployee(empId);
+			if(deletedEmployee.isEmpty() || !deletedEmployee.isPresent()) 
+				return new Response<String>(HttpStatus.OK, "Employee deleted successfully.");
+			return new Response<String>(HttpStatus.NOT_ACCEPTABLE, "Employee deletion failed.");
 		} catch (Exception ex) {
 			logger.error("Employee deletion failed with exception.");
 			return new Response<String>(HttpStatus.INTERNAL_SERVER_ERROR, "Employee deletion failed.");
